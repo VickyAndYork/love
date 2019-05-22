@@ -51,26 +51,20 @@
         </div>
     
     <script>
-        $(function () {
-            // lotteryAudio为audio标签的id
-            var oAudio = document.getElementById('my_media');
-            if (window.WeixinJSBridge) {
-                WeixinJSBridge.invoke('getNetworkType', {}, function (e) {
-                    oAudio.play();
-                }, false);
-            } else {
-                document.addEventListener("WeixinJSBridgeReady", function () {
-                    WeixinJSBridge.invoke('getNetworkType', {}, function (e) {
-                        oAudio.play();
-                    });
-                }, false);
-            }
-            oAudio.play();
-        })
     </script>
 
     <script>
     (function(){
+        document.addEventListener('DOMContentLoaded', function () {
+            function audioAutoPlay() {
+                var audio = document.getElementById('bg-music');
+                audio.play();
+                document.addEventListener("WeixinJSBridgeReady", function () {
+                    audio.play();
+                }, false);
+            }
+            audioAutoPlay();
+        });
         var canvas = $('#canvas');
 		
         if (!canvas[0].getContext) {
